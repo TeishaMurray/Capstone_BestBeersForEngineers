@@ -26,13 +26,15 @@ public class BeersController {
 @Autowired
 	private BeerRepository beerRepo;
 
+//get all beer
 @GetMapping("/allbeers")
 	public List<Beer> getAllBeers()
 	{
 		return beerRepo.findAll();
 	}
 
-@PostMapping("/addbeer")
+//add beer to api / create new beer 
+@PostMapping("/allbeers")
 	public Beer newBeer(@RequestBody Beer b)
 	{
 		return beerRepo.save(b);

@@ -9,6 +9,9 @@ export default class ListBeer extends Component {
             beer: []
             //est empty array where i will store my list
         }
+
+        this.addBeer = this.addBeer.bind(this);
+        //passing data as argument in the function of this component
     }
 
     componentDidMount(){
@@ -17,10 +20,20 @@ export default class ListBeer extends Component {
         })
     }
 
+    addBeer(){
+        this.props.history.push('/addbeer')
+        //this route will be called
+        //gives you more control 
+        //history passed down as props
+    }
+
     render() {
         return (
             <div>
                 <h2>Craft Beer List</h2>  
+                <div className="row">
+                    <button onClick={this.addBeer}>Add Beer</button>
+                </div>
                 <div className = "row">
                   <table className = "table">
 
