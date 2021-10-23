@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import DropdownMain from './DropdownMain'
 
 export default class AddBeer extends Component {
     constructor(props) {
@@ -9,9 +10,31 @@ export default class AddBeer extends Component {
             subtype: "",
             abv: 0,
             brewery: "",
-            state: ""
+            state: "",
+            beerType: [
+                { btype: "Ale", beerSubType: ["Amber", "Blonde", "Brown", "Golden", "Hefeweizen", "Pale", "Scotch", "Sour"] },
+                { btype: "IPA", beerSubType:["Black", "Coffee", "Double/Imperial", "East Coast", "Fruit", "Hazy", "Session", "West Coast", "Wet-Hopped", "Wood-Aged"] },
+                { btype: "Lager", beerSubType:["Amber/Red", "American", "Bock", "Kolsch", "Pilsner"] },
+                { btype: "Porter", beerSubTyp: ["Baltic", "Blonde", "Coffee", "Mole", "Oatmeal", "Peanut Butter", "Robust", "Smokey"] },
+                { btype: "Stout", beerSubTyp: ["Barrel-Aged", "Coffee", "Dry Irish", "Imperial", "Milk", "Oatmeal", "Oyster", "Pastry"]},
+            ]
         }
     }
+
+    // componentDidMount() {
+    //     this.setState({
+    //         beerType: [
+    //             { type: "Ale" },
+    //             { type: "Hefeweizen" },
+    //             { type: "IPA" },
+    //             { type: "Lager" },
+    //             { type: "Pale Ale" },
+    //             { type: "Pilsner" },
+    //             { type: "Porter" },
+    //             { type: "Stout" },
+    //         ]
+    //     })
+    // }
 
     render() {
         return (
@@ -27,7 +50,17 @@ export default class AddBeer extends Component {
                                         <input placeholder="Enter name of beer" name="name" className="form-control"
                                             value={this.state.name} onChange={this.nameHandler} />
                                     </div>
-                                    <div className="form-group">
+                                    <div className="dropdowns">
+                                        <select>
+                                            <option>-- Select --</option>
+                                        
+                                        {this.state.beerType.map(i => {
+                                            return <option>{i.btype}</option>
+                                        })}
+                                        </select>
+                                        {/* <DropdownMain /> */}
+                                    </div>
+                                    {/* <div className="form-group">
                                         <label for="beer-type">Type of Beer: </label>
                                         <select className="type" id="beer-type">
                                             <option value={this.state.type} onChange={this.typeHandler}>Ale</option>
@@ -45,7 +78,7 @@ export default class AddBeer extends Component {
                                         <select className="subtype">
                                             <option value={this.state.subtype} onChange={this.subtypeHandler}></option>
                                         </select>
-                                    </div>
+                                    </div> */}
                                     {/*     
                                     <button className="btn btn-success" onClick={this.saveStudent}> Save </button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)}> Cancel </button>                     */}
