@@ -11,30 +11,32 @@ export default class AddBeer extends Component {
             abv: 0,
             brewery: "",
             state: "",
-            beerType: [
-                { btype: "Ale", beerSubType: ["Amber", "Blonde", "Brown", "Golden", "Hefeweizen", "Pale", "Scotch", "Sour"] },
-                { btype: "IPA", beerSubType:["Black", "Coffee", "Double/Imperial", "East Coast", "Fruit", "Hazy", "Session", "West Coast", "Wet-Hopped", "Wood-Aged"] },
-                { btype: "Lager", beerSubType:["Amber/Red", "American", "Bock", "Kolsch", "Pilsner"] },
-                { btype: "Porter", beerSubTyp: ["Baltic", "Blonde", "Coffee", "Mole", "Oatmeal", "Peanut Butter", "Robust", "Smokey"] },
-                { btype: "Stout", beerSubTyp: ["Barrel-Aged", "Coffee", "Dry Irish", "Imperial", "Milk", "Oatmeal", "Oyster", "Pastry"]},
-            ]
+            beerType: [],
+            beerSubType: [],
+            selectBT: "",
+           
         }
     }
 
-    // componentDidMount() {
-    //     this.setState({
-    //         beerType: [
-    //             { type: "Ale" },
-    //             { type: "Hefeweizen" },
-    //             { type: "IPA" },
-    //             { type: "Lager" },
-    //             { type: "Pale Ale" },
-    //             { type: "Pilsner" },
-    //             { type: "Porter" },
-    //             { type: "Stout" },
-    //         ]
-    //     })
-    // }
+    componentDidMount() {
+        this.setState({
+            beerType: [
+                { btype: "Ale", beerSubType: ["Amber", "Berry", "Blonde", "Brown", "Citrus", "Golden", "Hefeweizen", "Pale", "Scotch", "Sour"] },
+                { btype: "IPA", beerSubType:["Berry", "Black", "Citrus", "Coffee", "Double/Imperial", "East Coast", "Hazy", "Session", "West Coast", "Wet-Hopped", "Wood-Aged"] },
+                { btype: "Lager", beerSubType:["Amber/Red", "American", "Bock", "Kolsch", "Pilsner"] },
+                { btype: "Porter", beerSubType: ["Baltic", "Blonde", "Coffee", "Mole", "Oatmeal", "Peanut Butter", "Robust", "Smokey"] },
+                { btype: "Stout", beerSubType: ["Barrel-Aged", "Coffee", "Dry Irish", "Imperial", "Milk", "Oatmeal", "Oyster", "Pastry"]},
+            ]
+        });
+    }
+
+    selectChange(e) {
+        this.setState({selectBT: e.target.value});
+        //^^set the value to whatever beer type is selected
+        this.setState({beerSubType: this.state.beerType.find(i => i.btype === e.target.value).beerSubType});
+        //^^find the beer type selected and display dorresponding sub menu
+
+    }
 
     render() {
         return (
@@ -51,34 +53,25 @@ export default class AddBeer extends Component {
                                             value={this.state.name} onChange={this.nameHandler} />
                                     </div>
                                     <div className="dropdowns">
-                                        <select>
-                                            <option>-- Select --</option>
-                                        
-                                        {this.state.beerType.map(i => {
-                                            return <option>{i.btype}</option>
-                                        })}
+                                        <select value={this.state.selectBT} onChange={this.selectChange.bind(this)}>
+                                            <option>--Select Type---</option>
+                                            {
+                                            this.state.beerType.map(i => {
+                                                return <option>{i.btype}</option>
+                                            })
+                                            }
                                         </select>
-                                        {/* <DropdownMain /> */}
-                                    </div>
-                                    {/* <div className="form-group">
-                                        <label for="beer-type">Type of Beer: </label>
-                                        <select className="type" id="beer-type">
-                                            <option value={this.state.type} onChange={this.typeHandler}>Ale</option>
-                                            <option value={this.state.type} onChange={this.typeHandler}>Hefeweizen</option>
-                                            <option value={this.state.type} onChange={this.typeHandler}>IPA</option>
-                                            <option value={this.state.type} onChange={this.typeHandler}>Lager</option>
-                                            <option value={this.state.type} onChange={this.typeHandler}>Pale Ale</option>
-                                            <option value={this.state.type} onChange={this.typeHandler}>Pilsner</option>
-                                            <option value={this.state.type} onChange={this.typeHandler}>Porter</option>
-                                            <option value={this.state.type} onChange={this.typeHandler}>Stout</option>
+
+                                        <select >
+                                            <option >--Select SubType--</option>
+                                            {
+                                                this.state.beerSubType.map(i => {
+                                                    return <option>{i}</option>
+                                                })
+                                            }
                                         </select>
                                     </div>
-                                    <div className="form-group">
-                                        <label>Subtype: </label>
-                                        <select className="subtype">
-                                            <option value={this.state.subtype} onChange={this.subtypeHandler}></option>
-                                        </select>
-                                    </div> */}
+                                       
                                     {/*     
                                     <button className="btn btn-success" onClick={this.saveStudent}> Save </button>
                                     <button className="btn btn-danger" onClick={this.cancel.bind(this)}> Cancel </button>                     */}
