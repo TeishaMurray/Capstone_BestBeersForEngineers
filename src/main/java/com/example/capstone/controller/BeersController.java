@@ -34,7 +34,7 @@ public class BeersController {
 	}
 
 //add beer to api / create new beer 
-@PostMapping("/allbeers")
+@PostMapping("/addbeer")
 	public Beer newBeer(@RequestBody Beer b)
 	{
 		return beerRepo.save(b);

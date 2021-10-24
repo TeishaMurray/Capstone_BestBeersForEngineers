@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BeerService from '../services/BeerService';
 // import DropdownMain from './DropdownMain'
 
 export default class AddBeer extends Component {
@@ -14,28 +15,75 @@ export default class AddBeer extends Component {
             beerType: [],
             beerSubType: [],
             selectBT: "",
-           
+
         }
+
+        this.nameHandler = this.nameHandler.bind(this);
+        this.selectChange = this.selectChange.bind(this);
+        this.abvHandler = this.abvHandler.bind(this);
+        this.breweryHandler = this.breweryHandler.bind(this);
+        this.locationHandler = this.locationHandler.bind(this);
+        this.saveBeer = this.saveBeer.bind(this);
+        this.cancelSave = this.cancelSave.bind(this);
     }
 
     componentDidMount() {
         this.setState({
             beerType: [
                 { btype: "Ale", beerSubType: ["Amber", "Berry", "Blonde", "Brown", "Citrus", "Golden", "Hefeweizen", "Pale", "Scotch", "Sour"] },
-                { btype: "IPA", beerSubType:["Berry", "Black", "Citrus", "Coffee", "Double/Imperial", "East Coast", "Hazy", "Session", "West Coast", "Wet-Hopped", "Wood-Aged"] },
-                { btype: "Lager", beerSubType:["Amber/Red", "American", "Bock", "Kolsch", "Pilsner"] },
+                { btype: "IPA", beerSubType: ["Berry", "Black", "Citrus", "Coffee", "Double/Imperial", "East Coast", "Hazy", "Session", "West Coast", "Wet-Hopped", "Wood-Aged"] },
+                { btype: "Lager", beerSubType: ["Amber/Red", "American", "Bock", "Kolsch", "Pilsner"] },
                 { btype: "Porter", beerSubType: ["Baltic", "Blonde", "Coffee", "Mole", "Oatmeal", "Peanut Butter", "Robust", "Smokey"] },
-                { btype: "Stout", beerSubType: ["Barrel-Aged", "Coffee", "Dry Irish", "Imperial", "Milk", "Oatmeal", "Oyster", "Pastry"]},
+                { btype: "Stout", beerSubType: ["Barrel-Aged","Chocolate", "Coffee", "Dry Irish", "Imperial", "Milk", "Oatmeal", "Oyster", "Pastry"] },
             ]
         });
     }
 
-    selectChange(e) {
-        this.setState({selectBT: e.target.value});
-        //^^set the value to whatever beer type is selected
-        this.setState({beerSubType: this.state.beerType.find(i => i.btype === e.target.value).beerSubType});
-        //^^find the beer type selected and display dorresponding sub menu
+    nameHandler(e) {
+        this.setState({name: e.target.value});
+    }
 
+    selectChange(e) {
+        this.setState({ selectBT: e.target.value });
+        //^^set the value to whatever beer type is selected
+        this.setState({ beerSubType: this.state.beerType.find(i => i.btype === e.target.value).beerSubType });
+        //^^find the beer type selected and display dorresponding sub menu
+        //BUG!!!: when i select and then de-select beer type i get an error on line 36; i think there needs to be some sort of conditional
+
+    }
+
+    abvHandler(e) {
+        this.setState({abv: e.target.value});
+    }
+
+    breweryHandler(e) {
+        this.setState({brewery: e.target.value});
+    }
+
+    locationHandler(e) {
+        this.setState({state: e.target.value})
+    }
+
+    saveBeer(e) {
+        e.preventDefault();
+        let beer = {
+            name: this.state.name, 
+            type: this.state.type, 
+            beerSubType: this.state.beerSubType, 
+            abv: this.state.abv, 
+            brewery: this.state.brewery, 
+            state: this.state.state
+        };
+
+        console.log('beer => ' + JSON.stringify(beer));
+
+        BeerService.createBeer(beer).then(res =>{
+            this.props.history.push('/beers')
+        })
+    }
+
+    cancelSave(e) {
+        this.props.history.push('/allbeers')
     }
 
     render() {
@@ -49,32 +97,46 @@ export default class AddBeer extends Component {
                                 <form>
                                     <div className="form-group">
                                         <label>Beer Name: </label>
-                                        <input placeholder="Enter name of beer" name="name" className="form-control"
+                                        <input type="text" placeholder="Enter name of beer" name="name" className="form-control"
                                             value={this.state.name} onChange={this.nameHandler} />
                                     </div>
-                                    <div className="dropdowns">
-                                        <select value={this.state.selectBT} onChange={this.selectChange.bind(this)}>
-                                            <option>--Select Type---</option>
-                                            {
-                                            this.state.beerType.map(i => {
-                                                return <option>{i.btype}</option>
-                                            })
-                                            }
-                                        </select>
+                                    <div className="row">
+                                        <div className="col">
+                                            <label>Beer Type: </label>
+                                            <select value={this.state.selectBT} onChange={this.selectChange.bind(this)}>
+                                                <option>--Select Type---</option>
+                                                {
+                                                    this.state.beerType.map(i => {
+                                                        return <option>{i.btype}</option>
+                                                    })
+                                                }
+                                            </select>
+                                        </div>
 
-                                        <select >
-                                            <option >--Select SubType--</option>
-                                            {
-                                                this.state.beerSubType.map(i => {
-                                                    return <option>{i}</option>
-                                                })
-                                            }
-                                        </select>
+                                        <div className="col">
+                                            <label>Beer SubType: </label>
+                                            <select >
+                                                <option >--Select SubType--</option>
+                                                {
+                                                    this.state.beerSubType.map(i => {
+                                                        return <option>{i}</option>
+                                                    })
+                                                }
+                                            </select>
+                                        </div>
                                     </div>
-                                       
-                                    {/*     
-                                    <button className="btn btn-success" onClick={this.saveStudent}> Save </button>
-                                    <button className="btn btn-danger" onClick={this.cancel.bind(this)}> Cancel </button>                     */}
+                                    <label>ABV%: </label>
+                                    <input type="number" step="any" min="1.00" max="67.50" name="abv" className="form-control"
+                                        value={this.state.abv} onChange={this.abvHandler} />
+                                    <label>Brewery Name: </label>
+                                    <input type="text" name="brewery" className="form-control"
+                                        value={this.state.brewery} onChange={this.breweryHandler} />
+                                    <label>State: </label>
+                                    <input type="text" maxLength="2" placeholder="OH" name="state" className="form-control"
+                                        value={this.state.state}  onChange={this.locationHandler} />
+
+                                    <button className="btn btn-success" onClick={this.saveBeer}> Add </button>
+                                    <button className="btn btn-danger" onClick={this.cancelSave}> Cancel </button>                    
                                 </form>
                             </div>
                         </div>

@@ -18,6 +18,7 @@ function App() {
         <div className="container">
           <Switch>
             <Route path="/allbeers" component={ListBeer}></Route>
+            <Route path="/beers" component={ListBeer}></Route>
             <Route path="/addbeer" component={AddBeer}></Route>
             <Route path="/" component={Home}></Route>
           </Switch>

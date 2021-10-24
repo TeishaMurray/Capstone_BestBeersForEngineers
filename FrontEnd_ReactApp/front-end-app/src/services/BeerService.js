@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BEER_API_BASE_URL ="http://localhost:8081/api/";
+const BEER_API_BASE_URL ="http://localhost:8081/api";
 
 class BeerService {
 
@@ -9,7 +9,7 @@ class BeerService {
         }
 
         createBeer(beer){
-            return axios.post(BEER_API_BASE_URL+"/addbeer",beer)
+            return axios.post(BEER_API_BASE_URL+"/addbeer", beer)
         }
 
         getBeerByName(name){
