@@ -8,8 +8,8 @@ export default class UpdateBeer extends Component {
         this.state = {
             id: this.props.match.params.id,
             name: "",
-            type: "",
-            subtype: "",
+            type: [],
+            subtype: [],
             abv: 0,
             brewery: "",
             state: "",
@@ -20,6 +20,7 @@ export default class UpdateBeer extends Component {
 
         this.nameHandler = this.nameHandler.bind(this);
         this.selectChange = this.selectChange.bind(this);
+        this.subSelectChange = this.subSelectChange.bind(this);
         this.abvHandler = this.abvHandler.bind(this);
         this.breweryHandler = this.breweryHandler.bind(this);
         this.locationHandler = this.locationHandler.bind(this);
@@ -48,9 +49,13 @@ export default class UpdateBeer extends Component {
     }
 
     selectChange(e) {
-        this.setState({ selectBT: e.target.value });
+        this.setState({ type: e.target.value });
         this.setState({ beerSubType: this.state.beerType.find(i => i.btype === e.target.value).beerSubType });
     }    
+
+    subSelectChange(e) {
+        this.setState({subtype: e.target.value})
+    }
 
     nameHandler(e) {
         this.setState({name: e.target.value});
@@ -74,7 +79,7 @@ export default class UpdateBeer extends Component {
             id: this.state.id,
             name: this.state.name, 
             type: this.state.type, 
-            beerSubType: this.state.subtype, 
+            subtype: this.state.subtype, 
             abv: this.state.abv, 
             brewery: this.state.brewery, 
             state: this.state.state
@@ -111,7 +116,7 @@ export default class UpdateBeer extends Component {
                                     <div className="row">
                                         <div className="col">
                                             <label>Beer Type: </label>
-                                            <select placeholder={this.state.type} value={this.state.selectBT} onChange={this.selectChange.bind(this)}>
+                                            <select placeholder={this.state.type} value={this.state.type} onChange={this.selectChange}>
                                                 <option>--Select Type---</option>
                                                 {
                                                     this.state.beerType.map(i => {
@@ -123,7 +128,7 @@ export default class UpdateBeer extends Component {
 
                                         <div className="col">
                                             <label>Beer SubType: </label>
-                                            <select >
+                                            <select value={this.state.subtype} onChange={this.subSelectChange}>
                                                 <option >--Select SubType--</option>
                                                 {
                                                     this.state.beerSubType.map(i => {
