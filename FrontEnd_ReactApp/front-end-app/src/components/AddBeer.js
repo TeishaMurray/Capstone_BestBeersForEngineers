@@ -39,7 +39,7 @@ export default class AddBeer extends Component {
             ]
         });
 
-        console.log(this.state.type[0])
+        // console.log(this.state.type[0])
     }
 
     nameHandler(e) {

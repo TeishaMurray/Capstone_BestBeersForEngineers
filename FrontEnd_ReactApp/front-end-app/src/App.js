@@ -10,6 +10,7 @@ import AddBeer from './components/AddBeer';
 import UpdateBeer from './components/UpdateBeer';
 import ViewBeer from './components/ViewBeer';
 import DeleteBeer from './components/DeleteBeer';
+import BeerByType from './components/BeerByType';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/update-beer/:id" component={UpdateBeer}></Route>
             <Route path="/view-beer/:id" component={ViewBeer}></Route>
             <Route path="/delete-beer/:id" component={DeleteBeer}></Route> 
+            <Route path="/beer-by-type/" component={BeerByType}></Route>
             <Route path="/" component={Home}></Route>
           </Switch>
         </div>

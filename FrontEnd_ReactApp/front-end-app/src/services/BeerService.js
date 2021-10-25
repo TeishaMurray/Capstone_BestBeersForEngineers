@@ -8,26 +8,32 @@ class BeerService {
             return axios.get(BEER_API_BASE_URL+"/allbeers");
         }
 
+        //Create
         createBeer(beer){
             return axios.post(BEER_API_BASE_URL+"/addbeer", beer)
         }
 
+        //Update
         updateBeer(beer, id){
             return axios.put(BEER_API_BASE_URL+"/beer/"+id,beer)
         }
 
+        //Read
         getBeerById(id){
             return axios.get(BEER_API_BASE_URL+"/beer/"+id)
         }
 
-        getBeerByName(name){
-            return axios.post(BEER_API_BASE_URL+"/beer/"+name)
-        }
 
+        // getBeerByName(name){
+        //     return axios.post(BEER_API_BASE_URL+"/beer/"+name)
+        // }
+
+        //Read
         getBeerByType(type){
-            return axios.post(BEER_API_BASE_URL+"/beer/"+type)
+            return axios.get(BEER_API_BASE_URL+"/beer-by-type/")
         }
 
+        //Delete
         deleteBeer(id){
             return axios.delete(BEER_API_BASE_URL+"/beer/"+id)
         }
