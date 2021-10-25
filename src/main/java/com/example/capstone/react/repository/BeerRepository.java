@@ -10,6 +10,8 @@ import com.example.capstone.react.model.Beer;
 public interface BeerRepository extends JpaRepository<Beer,Integer>{
 	//JpaRepo populates all of the find/update/deletes
 	
+//	List<Beer> findById(int id);
+	
 	List<Beer> findByName(String name);
 	//generic list, will only accept datatype (object?) of beer
 }

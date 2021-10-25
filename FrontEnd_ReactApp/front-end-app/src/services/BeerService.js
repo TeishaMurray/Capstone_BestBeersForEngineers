@@ -12,6 +12,14 @@ class BeerService {
             return axios.post(BEER_API_BASE_URL+"/addbeer", beer)
         }
 
+        updateBeer(beer, id){
+            return axios.put(BEER_API_BASE_URL+"/beer/"+id,beer)
+        }
+
+        getBeerById(id){
+            return axios.get(BEER_API_BASE_URL+"/beer/"+id)
+        }
+
         getBeerByName(name){
             return axios.post(BEER_API_BASE_URL+"/beer/"+name)
         }

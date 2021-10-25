@@ -40,6 +40,8 @@ public class BeersController {
 		return beerRepo.save(b);
 	}
 
+
+
 @GetMapping("/beer/{id}")
 	public ResponseEntity<Beer> getBeerById(@PathVariable int id)
 	{
@@ -48,7 +50,8 @@ public class BeersController {
 	}
 //^^do i need this if i don't want to search by id??
 
-@GetMapping("/beer/{name}")
+@GetMapping("/beers/{name}")
+//file path slightly different to avoid ambiguous mapping
 	public List<Beer> getBeerByName(@PathVariable String name)
 	{
 		List <Beer> beer=beerRepo.findByName(name);

@@ -7,6 +7,9 @@ import ListBeer from './components/ListBeer';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AddBeer from './components/AddBeer';
+import UpdateBeer from './components/UpdateBeer';
+import ViewBeer from './components/ViewBeer';
+import DeleteBeer from './components/DeleteBeer';
 
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
             <Route path="/allbeers" component={ListBeer}></Route>
             <Route path="/beers" component={ListBeer}></Route>
             <Route path="/addbeer" component={AddBeer}></Route>
+            <Route path="/update-beer/:id" component={UpdateBeer}></Route>
+            <Route path="/view-beer/:id" component={ViewBeer}></Route>
+            <Route path="/delete-beer/:id" component={DeleteBeer}></Route> 
             <Route path="/" component={Home}></Route>
           </Switch>
         </div>

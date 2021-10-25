@@ -11,6 +11,7 @@ export default class ListBeer extends Component {
         }
 
         this.addBeer = this.addBeer.bind(this);
+        this.editBeer = this.editBeer.bind(this);
         //passing data as argument in the function of this component
     }
 
@@ -26,6 +27,19 @@ export default class ListBeer extends Component {
         //gives you more control 
         //history passed down as props
     }
+
+    viewBeer(id){
+        this.props.history.push(`/view-beer/${id}`)
+    }
+
+    deleteBeer(id)
+     {
+        this.props.history.push(`/delete-beer/${id}`);
+     }
+
+     editBeer(id){
+         this.props.history.push(`/update-beer/${id}`)
+     }
 
     render() {
         return (
@@ -55,13 +69,18 @@ export default class ListBeer extends Component {
                             this.state.beer.map(
                                 beer => 
                                 <tr key = {beer.id}>
+                                    <td>{beer.id}</td>
                                     <td>{beer.name}</td>
                                     <td>{beer.type}</td>
                                     <td>{beer.subtype}</td>
                                     <td>{beer.abv}</td>
                                     <td>{beer.brewery}</td>
                                     <td>{beer.state}</td>
-                                    <td></td>
+                                    <td>
+                                        <button onClick={() => this.viewBeer(beer.id)} className="btn btn-primary">View</button>
+                                        <button onClick={() => this.editBeer(beer.id)} className="btn btn-primary">Update</button>
+                                        <button onClick={() => this.deleteBeer(beer.id)} className="btn btn-primary">Delete</button>
+                                        </td>
                                 </tr>
                             )
                         }
