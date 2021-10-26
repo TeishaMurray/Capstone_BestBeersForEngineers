@@ -60,7 +60,7 @@ public class BeersController {
 			System.out.println(new ResourceNotFoundException("There is no beer of this type ("+ type +") found"));
 		}
 		
-		return beerRepo.findByName(type);
+		return beerRepo.findByType(type);
 	
 	}
 
