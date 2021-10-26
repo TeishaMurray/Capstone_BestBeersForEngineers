@@ -21,6 +21,9 @@ export default class BeerByType extends Component {
 
         this.selectChange = this.selectChange.bind(this);
         this.submitSearch = this.submitSearch.bind(this);
+        this.addBeer = this.addBeer.bind(this);
+        this.editBeer = this.editBeer.bind(this);
+        this.viewBeer = this.viewBeer.bind(this);
     }
 
     componentDidMount() {
@@ -47,14 +50,20 @@ export default class BeerByType extends Component {
 
     submitSearch(e){
         e.preventDefault();
-        // this.setState({displayedBeer: this.state.beer.filter(selection => selection.type === this.state.type)});
         this.setState({displayedBeer: this.state.beer.filter(selection => selection.type === this.state.type)});
-        //^^^seen for a plit second then nothing
     }
 
-    // componentDidUpdate(){
-    //     console.log(this.displayedBeer)
-    // }
+    addBeer(){
+        this.props.history.push('/addbeer')
+    }
+
+    viewBeer(id){
+        this.props.history.push(`/view-beer/${id}`)
+    }
+
+    editBeer(id){
+        this.props.history.push(`/update-beer/${id}`)
+    }
 
     render() {
         console.log("search results: ", this.state.displayedBeer);
@@ -78,9 +87,11 @@ export default class BeerByType extends Component {
                                                 }
                                             </select>
                                         </div>
+                                        <div className="col">
+                                        <button className="btn btn-success" onClick={this.submitSearch}> Search </button>
+                                        </div>
                                     </div>
-                                    <button className="btn btn-success" onClick={this.submitSearch}> Search </button>
-                                </form>
+                                    </form>
                                 <table className = "table">
 
 <thead>

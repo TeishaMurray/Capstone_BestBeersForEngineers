@@ -12,6 +12,7 @@ export default class ListBeer extends Component {
 
         this.addBeer = this.addBeer.bind(this);
         this.editBeer = this.editBeer.bind(this);
+        this.viewBeer = this.viewBeer.bind(this);
         //passing data as argument in the function of this component
     }
 
@@ -23,23 +24,19 @@ export default class ListBeer extends Component {
 
     addBeer(){
         this.props.history.push('/addbeer')
-        //this route will be called
-        //gives you more control 
-        //history passed down as props
     }
 
     viewBeer(id){
         this.props.history.push(`/view-beer/${id}`)
     }
 
-    deleteBeer(id)
-     {
+    deleteBeer(id){
         this.props.history.push(`/delete-beer/${id}`);
-     }
+    }
 
-     editBeer(id){
-         this.props.history.push(`/update-beer/${id}`)
-     }
+    editBeer(id){
+        this.props.history.push(`/update-beer/${id}`)
+    }
 
     render() {
         return (
