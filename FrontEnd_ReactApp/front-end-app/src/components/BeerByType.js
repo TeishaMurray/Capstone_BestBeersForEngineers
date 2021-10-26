@@ -7,48 +7,63 @@ export default class BeerByType extends Component {
 
         this.state = {
             name: "",
-            type: [],
-            subtype: [],
+            type: "",
+            subtype: "",
             abv: 0,
             brewery: "",
             state: "",
             beerType: [],
             beerSubType: [],
             selectBT: "",
+            beer: [],
+            displayedBeer: []
         }
 
         this.selectChange = this.selectChange.bind(this);
-        this.subSelectChange = this.subSelectChange.bind(this);
+        this.submitSearch = this.submitSearch.bind(this);
     }
 
     componentDidMount() {
+        BeerService.getAllBeers().then((res) => {
+            this.setState({beer: res.data});
+            console.log(this.state.beer)
+        })
+
         this.setState({
             beerType: [
-                { btype: "Ale", beerSubType: ["Amber", "Berry", "Blonde", "Brown", "Citrus", "Golden", "Hefeweizen", "Pale", "Scotch", "Sour"] },
-                { btype: "IPA", beerSubType: ["Berry", "Black", "Citrus", "Coffee", "Double/Imperial", "East Coast", "Hazy", "Session", "West Coast", "Wet-Hopped", "Wood-Aged"] },
-                { btype: "Lager", beerSubType: ["Amber/Red", "American", "Bock", "Kolsch", "Pilsner"] },
-                { btype: "Porter", beerSubType: ["Baltic", "Blonde", "Coffee", "Mole", "Oatmeal", "Peanut Butter", "Robust", "Smokey"] },
-                { btype: "Stout", beerSubType: ["Barrel-Aged", "Chocolate", "Coffee", "Dry Irish", "Imperial", "Milk", "Oatmeal", "Oyster", "Pastry"] },
+                { btype: "Ale"},
+                { btype: "IPA"},
+                { btype: "Lager"},
+                { btype: "Porter"},
+                { btype: "Stout"},
             ]
         });
     }
 
     selectChange(e){
-        this.setState({type: e.target.value})
+        this.setState({type: e.target.value});
         this.setState({beerSubType: this.state.beerType.find(i => i.btype === e.target.value).beerSubType});
     }
 
-    subSelectChange(e){
-        this.setState({subtype: e.target.value})
+    submitSearch(e){
+        e.preventDefault();
+        // this.setState({displayedBeer: this.state.beer.filter(selection => selection.type === this.state.type)});
+        this.setState({displayedBeer: this.state.beer.filter(selection => selection.type === this.state.type)});
+        //^^^seen for a plit second then nothing
     }
 
+    // componentDidUpdate(){
+    //     console.log(this.displayedBeer)
+    // }
+
     render() {
+        console.log("search results: ", this.state.displayedBeer);
         return (
             <div>
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
-                            <h3 className="text-center">Search Beer By Name</h3>
+                            <h3 className="text-center">Search Beer By Type</h3>
                             <div className="card-body">
                                 <form>
                                     <div className="row">
@@ -63,22 +78,48 @@ export default class BeerByType extends Component {
                                                 }
                                             </select>
                                         </div>
-
-                                        <div className="col">
-                                            <label>Beer SubType: </label>
-                                            <select value={this.state.subtype} onChange={this.subSelectChange}>
-                                                <option >--Select SubType--</option>
-                                                {
-                                                    this.state.beerSubType.map(i => {
-                                                        return <option>{i}</option>
-                                                    })
-                                                }
-                                            </select>
-                                        </div>
                                     </div>
-                                    <button className="btn btn-success" onClick={this.saveBeer}> Add </button>
-                                    <button className="btn btn-danger" onClick={this.cancelSave}> Cancel </button>
+                                    <button className="btn btn-success" onClick={this.submitSearch}> Search </button>
                                 </form>
+                                <table className = "table">
+
+<thead>
+    <tr>
+      {/* <th>ID</th> */}
+      <th>Beer Name</th>
+      <th>Type</th>
+      <th>Sub-Type</th>
+      <th>ABV%</th>
+      <th>Brewery Name</th>
+      <th>State</th>
+      <th>Options</th>
+    </tr>
+</thead>
+
+<tbody>
+  {
+      this.state.displayedBeer.map(
+        displayedBeer => 
+          <tr key = {displayedBeer.id}>
+              <td>{displayedBeer.id}</td>
+              <td>{displayedBeer.name}</td>
+              <td>{displayedBeer.type}</td>
+              <td>{displayedBeer.subtype}</td>
+              <td>{displayedBeer.abv}</td>
+              <td>{displayedBeer.brewery}</td>
+              <td>{displayedBeer.state}</td>
+              <td>
+                  <button onClick={() => this.viewBeer(displayedBeer.id)} className="btn btn-primary">View</button>
+                  <button onClick={() => this.editBeer(displayedBeer.id)} className="btn btn-primary">Update</button>
+                  <button onClick={() => this.deleteBeer(displayedBeer.id)} className="btn btn-primary">Delete</button>
+                  </td>
+          </tr>
+      )
+  }
+
+</tbody>
+</table>
+
                             </div>
                         </div>
                     </div>

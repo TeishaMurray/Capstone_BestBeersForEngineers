@@ -50,17 +50,17 @@ public class BeersController {
 	}
 //^^do i need this if i don't want to search by id??
 
-@GetMapping("/beers/{name}")
+@GetMapping("/beer-by-type/{type}")
 //file path slightly different to avoid ambiguous mapping
-	public List<Beer> getBeerByName(@PathVariable String name)
+	public List<Beer> getBeerByType(@PathVariable String type)
 	{
-		List <Beer> beer=beerRepo.findByName(name);
+		List <Beer> beer=beerRepo.findByType(type);
 		if(beer.isEmpty())
 		{
-			System.out.println(new ResourceNotFoundException("Beer with the name "+ name +" not found"));
+			System.out.println(new ResourceNotFoundException("There is no beer of this type ("+ type +") found"));
 		}
 		
-		return beerRepo.findByName(name);
+		return beerRepo.findByName(type);
 	
 	}
 

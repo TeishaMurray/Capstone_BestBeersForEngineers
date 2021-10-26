@@ -13,5 +13,6 @@ public interface BeerRepository extends JpaRepository<Beer,Integer>{
 //	List<Beer> findById(int id);
 	
 	List<Beer> findByName(String name);
+	List<Beer> findByType(String type);
 	//generic list, will only accept datatype (object?) of beer
 }

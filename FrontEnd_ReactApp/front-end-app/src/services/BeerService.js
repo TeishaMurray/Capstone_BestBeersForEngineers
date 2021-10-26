@@ -30,7 +30,7 @@ class BeerService {
 
         //Read
         getBeerByType(type){
-            return axios.get(BEER_API_BASE_URL+"/beer-by-type/")
+            return axios.get(BEER_API_BASE_URL+"/beer-by-type/"+type)
         }
 
         //Delete
