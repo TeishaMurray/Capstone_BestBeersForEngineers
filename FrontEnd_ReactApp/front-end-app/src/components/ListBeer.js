@@ -66,7 +66,6 @@ export default class ListBeer extends Component {
                             this.state.beer.map(
                                 beer => 
                                 <tr key = {beer.id}>
-                                    <td>{beer.id}</td>
                                     <td>{beer.name}</td>
                                     <td>{beer.type}</td>
                                     <td>{beer.subtype}</td>

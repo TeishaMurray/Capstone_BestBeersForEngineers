@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BeerService from '../services/BeerService'
+import axios from "axios"
 
 export default class ViewBeer extends Component {
     constructor(props) {
@@ -12,14 +13,36 @@ export default class ViewBeer extends Component {
 
         this.editBeer = this.editBeer.bind(this);
         this.returnToList = this.returnToList.bind(this);
+        this.viewBrewery = this.viewBrewery.bind(this);
 
     }
 
     componentDidMount() {
         BeerService.getBeerById(this.state.id).then((res) => {
             this.setState({ beer: res.data })
-            console.log(res.data)
+            console.log("first log ", res.data)
+            console.log("second log", res.data.brewery)
+            console.log("third log ", this.state.beer.brewery)
         });
+    }
+
+    componentDidUpdate(){
+        let options = {
+            method: 'GET',
+                url: 'https://brianiswu-open-brewery-db-v1.p.rapidapi.com/breweries',
+                params: { by_name: this.state.beer.brewery},
+                headers: {
+                    'x-rapidapi-host': 'brianiswu-open-brewery-db-v1.p.rapidapi.com',
+                    'x-rapidapi-key': '97024a6684msh858963c77e4b29fp1f4aa4jsn1c6b3e1ccbaa'
+                }
+            };
+
+        axios.request(options).then(function (response) {
+            console.log("Results: ", response.data);
+        }).catch(function (error) {
+            console.error(error, "Something went wrong.");
+        });
+
     }
 
     editBeer() {
@@ -27,6 +50,11 @@ export default class ViewBeer extends Component {
     }
     returnToList() {
         this.props.history.push('/allbeers')
+    }
+
+    viewBrewery() {
+      //maybe a modal  
+
     }
 
     render() {
@@ -53,8 +81,9 @@ export default class ViewBeer extends Component {
                                         <label></label>
                                     </div>
                                     <div>
-                                    <button onClick={() => this.editBeer(this.state.beer.id)} className="btn btn-primary">Update</button>
-                                    <button onClick={() => this.returnToList()} className="btn btn-secondary">Done</button>
+                                        <button onClick={() => this.editBeer(this.state.beer.id)} className="btn btn-primary">Update</button>
+                                        <button onClick={() => this.returnToList()} className="btn btn-secondary">Done</button>
+                                        <button onClick={() => this.viewBrewery()} className="btn btn-secondary">View Brewery</button>
                                     </div>
                                 </form>
                             </div>
