@@ -1,16 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import Navbar from 'react-bootstrap/Navbar'
+import { Container, Offcanvas, Nav } from 'react-bootstrap'
+// import { Navbar, Container,   } from 'react-bootstrap'
 
-export default class NavBar extends Component {
-    render() {
-        return (
-            <div className="nav-bar">
-                <ul>
-                    <li><Link to="/about">About</Link></li>
-                    <li><Link to="/allbeers">Check the List</Link></li>
-                    <li><Link to="/beer-by-type">Search by Type</Link></li>
-                </ul>
-            </div>
-        )
-    }
+
+const NavBar = () => {
+    return (
+        <Navbar bg="dark" variant="dark" expand="xl">
+            <Container fluid>
+                <Navbar.Brand as={Link} to="/">Best Beers for Software Engineers</Navbar.Brand>
+                <Navbar.Toggle aria-controls="offcanvasNavbar" />
+                <Navbar.Offcanvas
+                    id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel"
+                    placement="end"
+                >
+                    <Offcanvas.Header closeButton>
+                        <Offcanvas.Title id="offcanvasNavbarLabel">Menu</Offcanvas.Title>
+                    </Offcanvas.Header>
+                    <Offcanvas.Body>
+                        <Nav className="justify-content-end flex-grow-1 pe-3">
+                            <Nav.Link as={Link} to="/">Home</Nav.Link>
+                            <Nav.Link as={Link} to="/allbeers">Check the List</Nav.Link>
+                            <Nav.Link as={Link} to="/beer-by-type">Search by Type</Nav.Link>
+                        </Nav>
+                    </Offcanvas.Body>
+                </Navbar.Offcanvas>
+            </Container>
+        </Navbar>
+    )
 }
+
+export default NavBar

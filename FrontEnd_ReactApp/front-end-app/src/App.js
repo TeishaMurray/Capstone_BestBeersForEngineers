@@ -4,7 +4,7 @@ import './App.css';
 import Home from './pages/Home';
 import NavBar from './components/NavBar';
 import ListBeer from './components/ListBeer';
-import Header from './components/Header';
+// import Header from './components/Header';
 import Footer from './components/Footer';
 import AddBeer from './components/AddBeer';
 import UpdateBeer from './components/UpdateBeer';
@@ -17,7 +17,7 @@ function App() {
   return (
     <div>
       <Router>
-        <Header />
+        {/* <Header /> */}
         <NavBar />
         <div className="container">
           <Switch>
@@ -28,7 +28,7 @@ function App() {
             <Route path="/view-beer/:id" component={ViewBeer}></Route>
             <Route path="/delete-beer/:id" component={DeleteBeer}></Route> 
             <Route path="/beer-by-type/" component={BeerByType}></Route>
-            <Route path="/" component={Home}></Route>
+            <Route path="/home" component={Home}></Route>
           </Switch>
         </div>
         <Footer />
