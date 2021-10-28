@@ -36,7 +36,7 @@ export default class ViewBeer extends Component {
                 params: { by_name: this.state.beer.brewery},
                 headers: {
                     'x-rapidapi-host': 'brianiswu-open-brewery-db-v1.p.rapidapi.com',
-                    'x-rapidapi-key': '97024a6684msh858963c77e4b29fp1f4aa4jsn1c6b3e1ccbaa'
+                    'x-rapidapi-key': '<api key here>'
                 }
             };
 
@@ -87,9 +87,9 @@ export default class ViewBeer extends Component {
         this.props.history.push('/allbeers')
     }
 
-    viewBrewery() {
-        console.log(this.state.breweryInfo)
-    }
+    // viewBrewery() {
+    //     console.log(this.state.breweryInfo)
+    // }
 
     render() {
         return (
@@ -121,16 +121,15 @@ export default class ViewBeer extends Component {
                                     <div>
                                         <button onClick={() => this.editBeer(this.state.beer.id)} className="btn btn-primary">Update</button>
                                         <button onClick={() => this.returnToList()} className="btn btn-secondary">Done</button>
-                                        <button onClick={() => this.viewBrewery()} className="btn btn-secondary">View Brewery</button>
+                                        {/* <button onClick={() => this.viewBrewery()} className="btn btn-secondary">View Brewery</button> */}
                                     </div>
                                 </form>
                             </div>
-                            <Modal show={false}>
+                            {/* <Modal show={false}>
                                 <Modal.Header>More About {this.state.beer.brewery}</Modal.Header>
                                 <Modal.Body>
-                                    {/* <h3>{response.data[0].city}</h3> */}
                                 </Modal.Body>
-                            </Modal>
+                            </Modal> */}
                         </div>
                     </div>
                 </div>
