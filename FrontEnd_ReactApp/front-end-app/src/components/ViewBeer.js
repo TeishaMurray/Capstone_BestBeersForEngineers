@@ -11,12 +11,12 @@ export default class ViewBeer extends Component {
         this.state = {
             id: this.props.match.params.id,
             beer: {},
-            breweryInfo: {}
+            breweryInfo: []
         }
 
         this.editBeer = this.editBeer.bind(this);
         this.returnToList = this.returnToList.bind(this);
-        this.viewBrewery = this.viewBrewery.bind(this);
+        // this.viewBrewery = this.viewBrewery.bind(this);
 
     }
 
@@ -40,13 +40,45 @@ export default class ViewBeer extends Component {
                 }
             };
 
-        axios.request(options).then(function (response) {
+        axios.request(options).then(response => {
+            // const breweryInfo = response.data;
+            // this.setState({breweryInfo});
             console.log("Results: ", response.data);
-            console.log("BreweryInfo ", response.data[0].city);
+            console.log("BreweryInfo ", response.data[0].city);            
         }).catch(function (error) {
             console.error(error, "Something went wrong.");
         });
 }
+    // componentDidUpdate(prevState){
+    //     let options = {
+    //         method: 'GET',
+    //             url: 'https://brianiswu-open-brewery-db-v1.p.rapidapi.com/breweries',
+    //             params: { by_name: this.state.beer.brewery},
+    //             headers: {
+    //                 'x-rapidapi-host': 'brianiswu-open-brewery-db-v1.p.rapidapi.com',
+    //                 'x-rapidapi-key': '97024a6684msh858963c77e4b29fp1f4aa4jsn1c6b3e1ccbaa'
+    //             }
+    //         };
+
+    //     // axios.request(options).then(function (response) {
+    //     //     console.log("Results: ", response.data);
+    //     //     console.log("BreweryInfo ", response.data[0].city);
+    //     // }).catch(function (error) {
+    //     //     console.error(error, "Something went wrong.");
+    //     // });
+    //     if(prevState.breweryInfo !== this.state.breweryInfo){
+    //         axios.request(options).then(response => {
+    //             this.setState({breweryInfo: response.data});
+    //             console.log("This.response?", this.state.breweryInfo[0]);
+    //             console.log(this.state.breweryInfo[0].city);
+    //             console.log(this.state.breweryInfo[0].state);
+    //             console.log(this.state.breweryInfo[0].website_url);
+    //         })
+    //         .catch(error => {
+    //             console.log("Error msg: ", error);
+    //         })
+    //     }
+    // }
 
     editBeer() {
         this.props.history.push(`/update-beer/${this.state.id}`)
@@ -56,14 +88,16 @@ export default class ViewBeer extends Component {
     }
 
     viewBrewery() {
-      //maybe a modal  
-
+        console.log(this.state.breweryInfo)
     }
 
     render() {
         return (
             <div>
-                {this.response.data[0].city}
+                <div className="testing">
+                    <h1>Testing</h1>
+                    <h2>{this.state.beer.city}</h2>
+                </div>
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
