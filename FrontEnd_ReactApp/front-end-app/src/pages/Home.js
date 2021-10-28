@@ -5,17 +5,17 @@ export default class Home extends Component {
         return (
             
             <div>
-                Home Page will include problem statement:
-                you've just finished an awful sprint
-                i mean all the features were bugs
-                amidst system updates and browser updates
-                everyone got the flu
-                but the team pulled through
-                you're in the final stretch and you gotta build morale
-                pizza parties are for babies
-                we need beer
-                and not just any beer
-                beer crafted by the hands of people as passionate about brewing as we are about software development
+                <p>Imagine you and your team just finished a god-awful sprint (or maybe it was a Capstone Project, who knows?)...</p>
+
+               <p>I mean everything that could possibly go wrong went wrong. What you thought were simple fixes crashed the whole application.</p>
+                
+                <p>At some point you were pretty sure that all of the features were bugs. But you guys pulled through. You don't throw these people a pizza party.</p> 
+                
+                <p>Hard working devs deserve more than just pizza. They deserve delicious, flavorful, potentially high ABV craft beers.
+                </p>
+
+                <h2>Cheers,</h2>
+                <h3>Murray</h3>
             </div>
         )
     }

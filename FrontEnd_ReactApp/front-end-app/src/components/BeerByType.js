@@ -115,13 +115,17 @@ export default class BeerByType extends Component {
                             {this.state.displayedBeer.map(
                                 displayedBeer =>
                                     <tr key={displayedBeer.id}>
-                                        <td>{displayedBeer.id}</td>
                                         <td>{displayedBeer.name}</td>
                                         <td>{displayedBeer.type}</td>
                                         <td>{displayedBeer.subtype}</td>
                                         <td>{displayedBeer.abv}</td>
                                         <td>{displayedBeer.brewery}</td>
                                         <td>{displayedBeer.state}</td>
+                                        <td>
+                                        <button onClick={() => this.viewBeer(displayedBeer.id)} className="btn btn-primary">View</button>
+                                        <button onClick={() => this.editBeer(displayedBeer.id)} className="btn btn-primary">Update</button>
+                                        <button onClick={() => this.deleteBeer(displayedBeer.id)} className="btn btn-primary">Delete</button>
+                                        </td>
                                     </tr>
                             )}
                         </tbody>
