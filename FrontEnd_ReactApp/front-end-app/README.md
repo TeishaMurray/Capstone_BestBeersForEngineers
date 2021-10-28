@@ -9,3 +9,13 @@ The project demonstrates my skills in developing a full stack web application. T
 
 #Installation
 This project has been deployed to GitHub Pages.
+https://teishamurray.github.io/Capstone_BestBeersForEngineers/
+
+If you have issues accessing this project from the link above you can take the following steps.
+1) Clone this repository
+2) Using your front-end editory of choice cd into the new folder and type $npm install
+3) Using Eclipse or Spring Tool Suite run application as Spring Tool Suite Application
+
+#Stretch Goals
+1) Effective use of 3rd party API to display information about the breweries
+2) Authentication functionality for login
