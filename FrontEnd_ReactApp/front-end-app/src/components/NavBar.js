@@ -1,13 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Navbar from 'react-bootstrap/Navbar'
-import { Container, Offcanvas, Nav } from 'react-bootstrap'
-// import { Navbar, Container,   } from 'react-bootstrap'
+import { Navbar, Container, Offcanvas, Nav } from 'react-bootstrap'
 
 
 const NavBar = () => {
     return (
-        <Navbar bg="dark" variant="dark" expand="xl">
+        <Navbar bg="dark" variant="dark" expand={false}>
             <Container fluid>
                 <Navbar.Brand as={Link} to="/">Best Beers for Software Engineers</Navbar.Brand>
                 <Navbar.Toggle aria-controls="offcanvasNavbar" />

@@ -28,7 +28,7 @@ function App() {
             <Route path="/view-beer/:id" component={ViewBeer}></Route>
             <Route path="/delete-beer/:id" component={DeleteBeer}></Route> 
             <Route path="/beer-by-type/" component={BeerByType}></Route>
-            <Route path="/home" component={Home}></Route>
+            <Route path="/" component={Home}></Route>
           </Switch>
         </div>
         <Footer />

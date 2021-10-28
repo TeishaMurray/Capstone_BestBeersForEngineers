@@ -43,7 +43,7 @@ export default class ListBeer extends Component {
             <div>
                 <h2>Craft Beer List</h2>  
                 <div className="row">
-                    <button onClick={this.addBeer}>Add Beer</button>
+                    <button onClick={this.addBeer} className="btn btn-primary">Add Beer</button>
                 </div>
                 <div className = "row">
                   <table className = "table">

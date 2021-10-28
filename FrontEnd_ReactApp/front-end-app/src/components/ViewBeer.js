@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
+import {Modal} from 'react-bootstrap'
 import BeerService from '../services/BeerService'
 import axios from "axios"
 
+
 export default class ViewBeer extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             id: this.props.match.params.id,
-            beer: {}
+            beer: {},
+            breweryInfo: {}
         }
 
         this.editBeer = this.editBeer.bind(this);
@@ -39,11 +42,11 @@ export default class ViewBeer extends Component {
 
         axios.request(options).then(function (response) {
             console.log("Results: ", response.data);
+            console.log("BreweryInfo ", response.data[0].city);
         }).catch(function (error) {
             console.error(error, "Something went wrong.");
         });
-
-    }
+}
 
     editBeer() {
         this.props.history.push(`/update-beer/${this.state.id}`)
@@ -60,6 +63,7 @@ export default class ViewBeer extends Component {
     render() {
         return (
             <div>
+                {this.response.data[0].city}
                 <div className="container">
                     <div className="row">
                         <div className="card col-md-6 offset-md-3 offset-md-3">
@@ -87,6 +91,12 @@ export default class ViewBeer extends Component {
                                     </div>
                                 </form>
                             </div>
+                            <Modal show={false}>
+                                <Modal.Header>More About {this.state.beer.brewery}</Modal.Header>
+                                <Modal.Body>
+                                    {/* <h3>{response.data[0].city}</h3> */}
+                                </Modal.Body>
+                            </Modal>
                         </div>
                     </div>
                 </div>

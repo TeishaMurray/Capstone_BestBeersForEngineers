@@ -18,7 +18,7 @@ import com.example.capstone.exception.ResourceNotFoundException;
 import com.example.capstone.react.model.Beer;
 import com.example.capstone.react.repository.BeerRepository;
 
-@CrossOrigin(origins="http://localhost:3001")
+@CrossOrigin(origins="http://localhost:3000")
 @RestController
 @RequestMapping("/api/")
 public class BeersController {
