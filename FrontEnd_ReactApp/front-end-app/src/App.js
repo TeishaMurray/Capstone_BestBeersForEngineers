@@ -16,6 +16,7 @@ import BeerByType from './components/BeerByType';
 function App() {
   return (
     <div>
+      <div className="img-ctr">
       <Router>
         {/* <Header /> */}
         <NavBar />
@@ -33,6 +34,7 @@ function App() {
         </div>
         <Footer />
       </Router>
+      </div>
     </div>
   );
 }
