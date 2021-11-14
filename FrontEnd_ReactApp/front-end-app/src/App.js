@@ -16,7 +16,7 @@ import BeerByType from './components/BeerByType';
 function App() {
   return (
     <div>
-      <div className="img-ctr">
+      <div className="screen">
       <Router>
         {/* <Header /> */}
         <NavBar />
