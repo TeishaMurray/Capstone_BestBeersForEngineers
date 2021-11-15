@@ -42,11 +42,11 @@ export default class ListBeer extends Component {
         return (
             <div>
                 <h2>Craft Beer List</h2>  
-                <div className="row">
-                    <button onClick={this.addBeer} className="btn btn-primary">Add Beer</button>
-                </div>
+                {/* <div className="row"> */}
+                    <button onClick={this.addBeer} className="btn btn-transparent btn-outline-light btn-sm lead border-3 ">Add Beer</button>
+                {/* </div> */}
                 <div className = "row">
-                  <table className = "table">
+                  <table className = "table table-dark table-bordered table-hover">
 
                       <thead>
                           <tr>
@@ -73,9 +73,9 @@ export default class ListBeer extends Component {
                                     <td>{beer.brewery}</td>
                                     <td>{beer.state}</td>
                                     <td>
-                                        <button onClick={() => this.viewBeer(beer.id)} className="btn btn-primary">View</button>
-                                        <button onClick={() => this.editBeer(beer.id)} className="btn btn-primary">Update</button>
-                                        <button onClick={() => this.deleteBeer(beer.id)} className="btn btn-primary">Delete</button>
+                                        <button onClick={() => this.viewBeer(beer.id)} className="btn btn-outline-light">View</button>
+                                        <button onClick={() => this.editBeer(beer.id)} className="btn btn-outline-light">Update</button>
+                                        <button onClick={() => this.deleteBeer(beer.id)} className="btn btn-outline-light">Delete</button>
                                         </td>
                                 </tr>
                             )
