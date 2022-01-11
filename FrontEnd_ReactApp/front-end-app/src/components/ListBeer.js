@@ -43,7 +43,7 @@ export default class ListBeer extends Component {
             <div>
                 <h2>Craft Beer List</h2>  
                 {/* <div className="row"> */}
-                    <button onClick={this.addBeer} className="btn btn-transparent btn-outline-light btn-sm lead border-3 ">Add Beer</button>
+                    <button onClick={this.addBeer} className="btn btn-transparent btn-outline-light btn-sm lead border-3 fw-bold">Add Beer</button>
                 {/* </div> */}
                 <div className = "row">
                   <table className = "table table-dark table-bordered table-hover">
